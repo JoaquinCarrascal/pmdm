@@ -40,11 +40,25 @@ $(document).ready(function (){
       });
 
     $(document).on("click", "#add-yellow", function () {
-        $("h1").addClass("yellow");
-      });
+      $("h1").addClass("yellow");
+    });
     
-      $(document).on("click", "#delete-yellow", function () {
-        $("h1").removeClass("yellow");
-      });
+    $(document).on("click", "#delete-yellow", function () {
+      $("h1").removeClass("yellow");
+    });
+
+    var counter = 0;
+
+    $(document).on("click" , "#btn-add" , function(){
+
+      $("body").append('<p>'+ ++counter +' >> Lorem ipsum<button class="btn-clear-p">Borrar</button></p>');
+
+    })
+
+    $(document).on("click" , ".btn-clear-p" , function(){
+
+      $(this).parent().remove();
+
+    })
 
 });
