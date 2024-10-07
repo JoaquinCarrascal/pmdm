@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+    $(document).on("click", "#btn-get-data", function(){
+
+        getPokemonList();
+
+    });
+
 $.ajax({
     url:"https://www.swapi.tech/api/people",
     method: "GET",
@@ -16,5 +22,6 @@ $.ajax({
         asíncrona, es decir, cuando llegue la respuesta del servidor*/
 
     });
+
 
 });
