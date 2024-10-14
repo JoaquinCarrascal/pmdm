@@ -1,0 +1,9 @@
+.tarjeta-coche{
+    width: 500px;
+    height: 200px;
+}
+
+.precio-coche{
+    position: absolute;
+    bottom: 20px;
+}
