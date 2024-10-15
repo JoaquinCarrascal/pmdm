@@ -1,0 +1,49 @@
+<div class="container caja mx-auto mt-4 w-75 rounded-4 shadow-lg">
+
+    <div class="row mx-auto justify-content-center py-2 pt-3">
+
+        <p class="col-4 m-2 bg-light p-2 shadow-lg rounded-5">{{actualCalc}}</p>
+        <p class="col-2 m-2 bg-light p-2 shadow-lg rounded-5 text-center">{{result}}</p>
+
+    </div>
+
+    <div class="row mx-auto justify-content-center py-2">
+
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(1)">1</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(2)">2</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(3)">3</button>
+
+    </div>
+
+    <div class="row mx-auto justify-content-center py-2">
+
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(4)">4</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(5)">5</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(6)">6</button>
+
+    </div>
+
+    <div class="row mx-auto justify-content-center py-2">
+
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(7)">7</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(8)">8</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(9)">9</button>
+
+    </div>
+
+    <div class="row mx-auto justify-content-center py-2">
+
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="asignNumber(0)">0</button>
+        <button class="col-1 m-2 fw-bold" mat-raised-button (click)="clearAll()">C</button>
+
+    </div>
+
+    <div class="row mx-auto justify-content-center py-2">
+
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)='selectOperator("+")'>+</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)='selectOperator("-")'>-</button>
+        <button class="col-2 m-2 fw-bold" mat-raised-button (click)="solveProblem()">=</button>
+
+    </div>
+
+</div>
