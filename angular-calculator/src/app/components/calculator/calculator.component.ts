@@ -31,6 +31,18 @@ solveProblem(){
       return this.result;
 
   }
+  if(this.operator == '*'){
+
+    this.multiplicacion();
+      return this.result;
+
+  }
+  if(this.operator == '/'){
+
+    this.division();
+      return this.result;
+
+  }
 
   return 0;
 
@@ -73,6 +85,20 @@ suma(){
 resta(){
 
   this.result = this.num1 - this.num2;
+  return this.result;
+
+}
+
+multiplicacion(){
+
+  this.result = this.num1 * this.num2;
+  return this.result;
+
+}
+
+division(){
+
+  this.result = this.num1 / this.num2;
   return this.result;
 
 }
