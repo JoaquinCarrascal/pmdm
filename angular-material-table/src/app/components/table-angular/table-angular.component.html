@@ -1,7 +1,13 @@
-<table mat-table [dataSource]="listadoAlumnos" class="mat-elevation-z8">
+<mat-checkbox class="" (change)='update("alumnoId" , 0)' checked="true">Id alumno</mat-checkbox>
+<mat-checkbox class="" (change)='update("nombre" , 1)' checked="true">Nombre alumno</mat-checkbox>
+<mat-checkbox class="" (change)='update("apellidos" , 2)' checked="true">Apellidos alumno</mat-checkbox>
+<mat-checkbox class="" (change)='update("nif" , 3)' checked="true">NIF alumno</mat-checkbox>
+<mat-checkbox class="" (change)='update("edad" , 4)' checked="true">Edad alumno</mat-checkbox>
+<mat-checkbox class="" (change)='update("curso" , 5)' checked="true">Curso alumno</mat-checkbox>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+
+
+<table mat-table [dataSource]="listadoAlumnos" class="mat-elevation-z8">
   
     <!-- Position Column -->
     <ng-container matColumnDef="alumnoId">

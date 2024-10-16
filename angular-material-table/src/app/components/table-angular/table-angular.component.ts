@@ -31,4 +31,21 @@ export class TableAngularComponent {
   columnas: string[] = ['alumnoId', 'nombre', 'apellidos', 'nif', 'edad', 'curso'];
   listadoAlumnos = ALUMNOS;
 
+  update(data: string, position: number) {
+      
+    if(this.columnas.includes(data)){
+
+      let index = this.columnas.indexOf(data);
+      this.columnas.splice(index, 1);
+
+    }else{
+
+      this.columnas.splice(position , 0 , data);
+
+    }
+
+    console.log(this.columnas);
+    
+    }
+
 }
