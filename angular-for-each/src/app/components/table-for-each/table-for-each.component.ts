@@ -9,11 +9,16 @@ export interface ContryPhone {
 }
 
 const COUNTRIES_PREFIXES: ContryPhone[] = [
-  {name: 'España', flag: 'spain/spain_640.png', prefix: [34]},
-  {name: 'Francia', flag: 'france/france_640.png', prefix: [33]},
-  {name: 'Italia', flag: 'italy/italy_640.png', prefix: [39]},
-  {name: 'Portugal', flag: 'portugal/portugal_640.png', prefix: [351]},
-  {name: 'Alemania', flag: 'germany/germany_640.png', prefix: [49]},
+  {name: 'España', flag: 'es', prefix: [34]},
+  {name: 'Francia', flag: 'fr', prefix: [33]},
+  {name: 'Italia', flag: 'it', prefix: [39]},
+  {name: 'Portugal', flag: 'pt', prefix: [351]},
+  {name: 'Alemania', flag: 'de', prefix: [49]},
+  {name: 'Reino Unido', flag: 'gb', prefix: [44]},
+  {name: 'Estados Unidos', flag: 'us', prefix: [1]},
+  {name: 'Japón', flag: 'jp', prefix: [81]},
+  {name: 'China', flag: 'cn', prefix: [86]},
+  {name: 'Republica dominicana', flag: 'do', prefix: [1809, 829, 849]},
   
 ];
 
@@ -25,5 +30,11 @@ const COUNTRIES_PREFIXES: ContryPhone[] = [
 export class TableForEachComponent {
 
   countryList = COUNTRIES_PREFIXES;
+
+  flagCode(data: string){
+
+   return `fi fi-${data} fis`;
+
+  }
 
 }
