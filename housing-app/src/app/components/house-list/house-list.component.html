@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        @for(item of houseList ; track item.id){
+        <div class="col-3">
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="item.photo" [alt]="item.name" style="width: 18rem; height: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p class="card-text">{{item.city}} - {{item.state}}</p>
+                    @if(item.wifi){
+
+                        <p><i class="bi bi-wifi"></i></p>
+
+                    }@else {
+
+                        <p><i class="bi bi-wifi-off"></i></p>
+
+                    }
+                </div>
+            </div>
+
+        </div>
+        }
+    </div>
+</div>
