@@ -11,8 +11,10 @@ export class SwapiCarServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getCarList(): Observable<RespuestaSwapi[]>{
-    return this.http.get<RespuestaSwapi[]>('https://swapi.dev/api/vehicles');
+  getCarList(): Observable<RespuestaSwapi>{
+
+    return this.http.get<RespuestaSwapi>('https://swapi.dev/api/vehicles');
+    
   }
 
 }

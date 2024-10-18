@@ -1,11 +1,13 @@
 <div class="container-fluid">
     
     <div class="row">
-        @for(){
+        @for(x of carList ; track x.name){
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img [src]="createImageUrl(x.url)" 
+                class="card-img-top" 
+                [alt]="x.name">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title">{{x.name}}</h5>
             </div>
         </div>
         }
