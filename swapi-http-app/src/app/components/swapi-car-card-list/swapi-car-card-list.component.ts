@@ -15,11 +15,14 @@ export class SwapiCarCardListComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.swapiCarService.getCarList().subscribe((x: RespuestaSwapi) => {
+    for (let i = 1; i < 5; i++) {
+      
+      this.swapiCarService.getCarList(`page=${i}`).subscribe((x: RespuestaSwapi) => {
 
-      this.carList = x.results;
+        this.carList.push(...x.results);
 
-    });
+      });
+    }
 
   }
 
