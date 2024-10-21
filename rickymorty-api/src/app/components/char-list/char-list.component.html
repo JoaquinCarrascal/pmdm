@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row">
+        @for(char of charList ; track char.id){
+        <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <h5 class="card-title text-center pt-2">{{char.name}}</h5>
+                    <img class="card-img-top" [src]="char.image" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">Este personaje está: {{char.status}}</p>
+                        <p class="card-text">Especie: {{char.species}}</p>
+                        <p class="card-text">{{char.gender}}</p>
+                    </div>
+                </div>     
+        </div>
+        }
+    </div>
+</div>
