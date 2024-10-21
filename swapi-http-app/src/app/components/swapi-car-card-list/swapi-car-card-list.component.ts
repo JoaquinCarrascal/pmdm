@@ -11,11 +11,13 @@ export class SwapiCarCardListComponent implements OnInit {
 
   carList: SwapiCar[] = [];
 
+  pages = 5;
+
   constructor(private swapiCarService: SwapiCarServiceService) { }
 
   ngOnInit(): void {
     
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < this.pages; i++) {
       
       this.swapiCarService.getCarList(`page=${i}`).subscribe((x: RespuestaSwapi) => {
 
