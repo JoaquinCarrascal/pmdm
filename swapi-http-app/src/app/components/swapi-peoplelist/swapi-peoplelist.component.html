@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    
+    <div class="row">
+        @for(x of charList ; track x.name){
+        <div class="card" style="width: 18rem;">
+            <img [src]="createImageUrl(x.url)" 
+                class="card-img-top" 
+                [alt]="x.name">
+            <div class="card-body">
+              <h5 class="card-title">{{x.name}}</h5>
+            </div>
+        </div>
+        }
+    </div>
+    
+</div>
