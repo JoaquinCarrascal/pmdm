@@ -1,0 +1,25 @@
+<div class="container-fluid mt-4">
+
+    <div class="row justify-content-around">
+
+        <div class="col-3 justify-content-center"> <app-pokemon [pokemon]="pokemon1" [attackDeactivate]="itsYourTurn"></app-pokemon> </div>
+
+        <div class="col-3 justify-content-center text-center" (attackOtherEmiter) = "proceedAttack($event)">
+            <h3>Turno</h3>
+
+            @if(turn){
+                <p><i class="bi bi-arrow-left" style="font-size: 25pt;"></i></p>
+            }
+            @else{
+                <p><i class="bi bi-arrow-right" style="font-size: 25pt;"></i></p>
+            }
+            
+        </div>
+
+        <div class="col-3 justify-content-center"> <app-pokemon [pokemon]="pokemon2" [attackDeactivate]="itsYourTurn"></app-pokemon> </div>
+
+    </div>
+
+</div>
+
+
