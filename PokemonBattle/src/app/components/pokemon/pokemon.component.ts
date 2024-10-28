@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { PokemonResponse } from '../../model/ipokemon.interface';
 import { PokemonService } from '../../services/pokemon.service';
 
@@ -7,41 +7,53 @@ import { PokemonService } from '../../services/pokemon.service';
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.css'
 })
-export class PokemonComponent implements OnInit{
+export class PokemonComponent{
   
-  @Input() pokemon: PokemonResponse | undefined;
-  @Input() attackDeactivate: boolean | undefined;
-  @Output() attackOtherEmiter = new EventEmitter<number>();
+  @Input() pokemon: [PokemonResponse , number] | undefined;
+  @Output() sendAttackEmitter = new EventEmitter<number[]>();
 
   id: number | undefined;
   pokemonHealth: number = 100;
 
   constructor(private pokemonService: PokemonService) { }
 
-  ngOnInit(): void {
+  initPokemon(idImg: number): string{
 
-    this.id = this.pokemon?.id;
+    if(idImg){
 
-  }
-
-  createImgUrl(idImg: number): string{
-
-    if(idImg)
-      return this.pokemonService.createImgUrl(idImg);
+      if(this.pokemon !== undefined){
+        this.id = this.pokemon[0].id;
+        this.pokemonHealth = this.pokemon[1];
+        return this.pokemonService.createImgUrl(idImg);
+      }
+      else{
+        return '';
+      }
+    }
     else
       return '';
 
     }
 
-  attackOther() {
-    
-    this.attackOtherEmiter.emit(20);
+  sendAttack() {
+
+    if (this.id !== undefined) {
+
+      this.sendAttackEmitter.emit([20, this.id]);
+
+    }
 
   }
 
-  recieveAttack($event: number) {
-      
-    this.pokemonHealth -= $event;
+  getProgressColor(){
+
+    if(this.pokemonHealth <= 25){
+      return "danger";
+    }else if(this.pokemonHealth <= 70 && this.pokemonHealth > 25){
+      return "warning";
+    }else{
+      return "success";
+    }
 
   }
 
