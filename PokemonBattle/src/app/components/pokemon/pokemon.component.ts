@@ -39,7 +39,7 @@ export class PokemonComponent{
 
     if (this.id !== undefined) {
 
-      this.sendAttackEmitter.emit([20, this.id]);
+      this.sendAttackEmitter.emit([Math.round(Math.random() * 25) + 1, this.id]);
 
     }
 

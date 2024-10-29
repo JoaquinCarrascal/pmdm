@@ -1,7 +1,7 @@
 <div class="card mb-3" style="width: 350px;">
     <div class="row g-0">
       @if(pokemon){
-      <div class="col-md-4">
+      <div class="col-md-4 align-content-center">
           <img 
           [src]="initPokemon(pokemon[0]!.id)" 
           class="img-fluid rounded-start" 
@@ -9,10 +9,15 @@
           style="width: 200px;">
       </div>
       <div class="col-md-8">
-        <div class="card-body">
+        <div class="card-body text-center justify-content-center align-content-center">
           <ngb-progressbar class="mb-3" [type]="getProgressColor()" textType="white" [value]="pokemonHealth" [showValue]="true" />
           <h5 class="card-title">{{pokemon[0]!.name | titlecase}}</h5>
-          <button type="button" class="btn btn-danger mt-3" name="btn-attack" (click)="sendAttack()">Atacar</button>
+          <button class="pushable" name="btn-attack" (click)="sendAttack()">
+            <span class="shadow"></span>
+            <span class="edge"></span>
+            <span class="front"> Atacar </span>
+          </button>
+
         </div>
       </div>
 

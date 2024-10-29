@@ -17,8 +17,8 @@ export class PokemonBattleComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.pokemonService.getPokemon(137).subscribe((pokemon: PokemonResponse) => this.pokemonL = [pokemon , 100]);
-    this.pokemonService.getPokemon(200).subscribe((pokemon: PokemonResponse) => this.pokemonR = [pokemon , 100]);
+    this.pokemonService.getPokemon(Math.floor(Math.random() * 1025) + 1).subscribe((pokemon: PokemonResponse) => this.pokemonL = [pokemon , 100]);
+    this.pokemonService.getPokemon(Math.floor(Math.random() * 1025) + 1).subscribe((pokemon: PokemonResponse) => this.pokemonR = [pokemon , 100]);
     this.turn = Math.random() >= 0.5;
 
   }
