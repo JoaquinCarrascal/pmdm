@@ -2,7 +2,6 @@
     <div class="row g-0">
       @if(pokemon){
       <div class="col-md-4 align-content-center">
-          <ng-lottie [options]="options" (animationCreated)="animationCreated($event)" />
           <img 
           [src]="initPokemon(pokemon[0]!.id)" 
           class="img-fluid rounded-start" 

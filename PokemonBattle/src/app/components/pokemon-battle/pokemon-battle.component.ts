@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonResponse } from '../../model/ipokemon.interface';
 
