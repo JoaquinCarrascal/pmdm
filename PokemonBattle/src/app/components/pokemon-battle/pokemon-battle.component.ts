@@ -1,66 +1,55 @@
-import { Component, OnInit} from '@angular/core';
-import { PokemonService } from '../../services/pokemon.service';
-import { PokemonResponse } from '../../model/ipokemon.interface';
+import { Component, ViewChild } from '@angular/core';
+import { PokemonComponent } from '../pokemon/pokemon.component';
+
 
 @Component({
   selector: 'app-pokemon-battle',
   templateUrl: './pokemon-battle.component.html',
   styleUrl: './pokemon-battle.component.css'
 })
-export class PokemonBattleComponent implements OnInit{
+export class PokemonBattleComponent{
 
-  pokemonL: [PokemonResponse , number] | undefined;
-  pokemonR: [PokemonResponse , number] | undefined;
-  turn: boolean = true;
+    // TURN possible values: 1, 2
+    pokemonTurn = 1;
+    pokemonPlayer1Id = Math.round(Math.random()*1025) + 1;
+    pokemonPlayer2Id = Math.round(Math.random()*1025) + 1;
+    lifePokemon1 = 100;
+    lifePokemon2 = 100;
+
+    //@ViewChild(PokemonComponent) pokemon1: PokemonComponent | undefined;
+    //@ViewChild(PokemonComponent) pokemon2: PokemonComponent | undefined;
   
-  constructor(private pokemonService: PokemonService) { }
-
-  ngOnInit(): void {
-
-    this.pokemonService.getPokemon(Math.floor(Math.random() * 1025) + 1).subscribe((pokemon: PokemonResponse) => this.pokemonL = [pokemon , 100]);
-    this.pokemonService.getPokemon(Math.floor(Math.random() * 1025) + 1).subscribe((pokemon: PokemonResponse) => this.pokemonR = [pokemon , 100]);
-    this.turn = Math.random() >= 0.5;
-
-  }
-
-  processAttack(data: number[]) {
-    
-    if(this.pokemonL !== undefined && this.pokemonR !== undefined){
-
-      if(this.pokemonL[0].id === data[1] && this.turn === true){
-        
-        this.pokemonR[1] -= data[0];
-
-        this.turn = false;
-
-        if(this.pokemonR[1]<=0){
-          
-          alert("Ha ganado: " + this.pokemonL[0].name);
-
-          this.ngOnInit();
-
+    applyDamage(damage: number) {
+      if (this.pokemonTurn == 1) {
+        // Apply damage to Pokemon 2
+        this.lifePokemon2 -= damage;
+        if(this.lifePokemon2 <= 0){
+          alert('Pokemon 1 wins!');
+          this.restartGame();
         }
-
-      }
-      if(this.pokemonR[0].id === data[1] && this.turn === false){
-
-        this.pokemonL[1] -= data[0];
-
-        this.turn = true;
-        
-        if(this.pokemonL[1]<=0){
-          
-          alert("Ha ganado: " + this.pokemonR[0].name);
-
-          this.ngOnInit();
-
+        this.pokemonTurn = 2;
+      } else {
+        // Apply damage to Pokemon 1
+        this.lifePokemon1 -= damage;
+        if(this.lifePokemon1 <= 0){
+          alert('Pokemon 2 wins!');
+          this.restartGame();
         }
-
+        this.pokemonTurn = 1;
       }
     }
 
-  }
+    restartGame(){
+      
+      this.pokemonPlayer1Id = Math.round(Math.random() * 1025) + 1;
+      this.pokemonPlayer2Id = Math.round(Math.random() * 1025) + 1;
+      this.lifePokemon1 = 100;
+      this.lifePokemon2 = 100;
+      this.pokemonTurn = 1;
 
+      
+
+    }
 
 
 }

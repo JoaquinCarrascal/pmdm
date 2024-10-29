@@ -1,40 +1,24 @@
-<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
-
-    <div class="row justify-content-around">
-
-        <div class="col-4 justify-content-center"> 
-            <app-pokemon 
-            [pokemon]="pokemonL" 
-            (sendAttackEmitter) = "processAttack($event)">
-            </app-pokemon> 
-        </div>
-
-        <div class="col-2 justify-content-center align-content-center text-center">
-            <h3>Turno de: 
-                @if(turn && pokemonL){ {{pokemonL[0].name | titlecase}} }
-                @else{ @if(pokemonR){ {{pokemonR[0].name | titlecase}} } }
-            </h3>
-
-            @if(turn){
-                <p><i class="bi bi-arrow-left" style="font-size: 25pt;"></i></p>
-            }
-            @else{
-                <p><i class="bi bi-arrow-right" style="font-size: 25pt;"></i></p>
-            }
-            
-        </div>
-
-        <div class="col-4 justify-content-center"> 
-            
-            <app-pokemon 
-            [pokemon]="pokemonR" 
-            (sendAttackEmitter) = "processAttack($event)">
-            </app-pokemon> 
-
-        </div>
-
+<div class="container fluid">
+    <div class="row">
+      <div class="col-md-4 col-12">
+        <app-pokemon
+          [pokemonId]="pokemonPlayer1Id"
+          [life]="lifePokemon1"
+          [isMyTurn]="pokemonTurn == 1"
+          (onAttackDone)="applyDamage($event)"
+          #pokemon1
+        ></app-pokemon>
+      </div>
+      <div class="col-md-4 col-12">
+        <app-pokemon
+          [pokemonId]="pokemonPlayer2Id"
+          [life]="lifePokemon2"
+          [isMyTurn]="pokemonTurn == 2"
+          (onAttackDone)="applyDamage($event)"
+          #pokemon2
+        ></app-pokemon>
+      </div>
     </div>
-
-</div>
+  </div>
 
 
