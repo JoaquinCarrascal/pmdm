@@ -7,12 +7,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { PokemonBattleComponent } from './components/pokemon-battle/pokemon-battle.component';
 import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
+import { ImgUrlGeneratorPipe } from './pipes/img-url-generator.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonComponent,
-    PokemonBattleComponent
+    PokemonBattleComponent,
+    ImgUrlGeneratorPipe
   ],
   imports: [
     BrowserModule,
