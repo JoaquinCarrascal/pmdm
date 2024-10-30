@@ -21,12 +21,23 @@
         ><i>{{ life }}%</i></ngb-progressbar
       >
     </p>
-    @if(isMyTurn == true){
-    <button (click)="doAttack()" class="btn btn-primary">Attack</button>
-    } @else {
-    <button disabled="disabled" class="btn btn-primary">
-      Waiting attack..
-    </button>
-    }
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-10 text-center">
+          @if(isMyTurn == true){
+        <button (click)="doAttack()" class="btn btn-primary">Atacar</button>
+        } @else {
+        <button disabled="disabled" class="btn btn-primary">
+          Esperando ataque...
+        </button>
+        }
+        </div>
+      </div>
+      <div class="row justify-content-center align-content-center">
+        <div class="col-10 text-center my-1">
+          <button (click)="generateNewPokemon()" class="btn btn-success">Cambiar pokemon</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

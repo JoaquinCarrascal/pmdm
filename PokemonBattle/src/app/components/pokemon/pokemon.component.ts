@@ -23,6 +23,17 @@ export class PokemonComponent implements OnChanges {
 
   constructor(private pokemonService: PokemonService) {}
 
+  generateNewPokemon() {
+
+    this.pokemonId = Math.round(Math.random() * 1025) + 1;
+    this.pokemonService
+      .getPokemon(this.pokemonId!)
+      .subscribe((pokemonResponse) => {
+        this.pokemon = pokemonResponse;
+      });
+
+  }
+
   ngOnInit(): void {
     this.pokemonService
       .getPokemon(this.pokemonId!)

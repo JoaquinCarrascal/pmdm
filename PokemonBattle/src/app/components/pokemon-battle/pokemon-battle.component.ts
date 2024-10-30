@@ -47,8 +47,6 @@ export class PokemonBattleComponent{
       this.lifePokemon2 = 100;
       this.pokemonTurn = 1;
 
-      
-
     }
 
 
