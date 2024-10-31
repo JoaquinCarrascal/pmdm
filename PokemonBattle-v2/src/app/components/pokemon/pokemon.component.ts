@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonResponse } from '../../models/ipokemon';
 import { ImgUrlGeneratorPipe } from '../../pipes/img-url-generator.pipe';
 import { PokemonRandomizerPipe } from '../../pipes/pokemon-randomizer.pipe';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-pokemon',
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.css'
 })
-export class PokemonComponent implements OnInit {
+export class PokemonComponent implements OnInit , OnChanges{
 
   @Input() pokemonId: number | undefined;
   @Input() health: number = 100;
@@ -17,6 +18,10 @@ export class PokemonComponent implements OnInit {
   @Output() attack = new EventEmitter<number>();
   pokemon: PokemonResponse | undefined;
   urlImg: string | undefined;
+
+  options: AnimationOptions = {
+    path: 'assets/exploding-animation.json',
+  };
 
   constructor(private pokemonServ: PokemonService, 
             private urlImgGen: ImgUrlGeneratorPipe,
@@ -33,6 +38,13 @@ export class PokemonComponent implements OnInit {
         
       });
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['health'] && changes['health'].currentValue != 100){
+      
+
+    }
   }
 
   getProgressColor(){

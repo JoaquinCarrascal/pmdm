@@ -9,6 +9,7 @@ import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { ImgUrlGeneratorPipe } from './pipes/img-url-generator.pipe';
 import { BattleComponent } from './pages/battle/battle.component';
 import { PokemonRandomizerPipe } from './pipes/pokemon-randomizer.pipe';
+import { provideLottieOptions } from 'ngx-lottie';
 
 
 @NgModule({
@@ -23,7 +24,12 @@ import { PokemonRandomizerPipe } from './pipes/pokemon-randomizer.pipe';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [provideHttpClient(), ImgUrlGeneratorPipe , PokemonRandomizerPipe],
+  providers: [provideHttpClient(), 
+            ImgUrlGeneratorPipe, 
+            PokemonRandomizerPipe,
+            provideLottieOptions({
+              player: () => import('lottie-web'),
+            }),],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
