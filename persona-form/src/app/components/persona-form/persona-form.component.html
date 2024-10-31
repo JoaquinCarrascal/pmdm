@@ -1,37 +1,50 @@
-<div class="container">
+<div class="container mt-4">
 
-    <form class="shadow-lg p-4">
+    <form class="shadow-lg p-4" action="" method="post" (ngSubmit)="onSubmit()"
+    #personaForm = "ngForm">
         <div class="form-group">
           <label for="nombreInput">Nombre</label>
-          <input type="text" class="form-control" id="nombreInput" placeholder="Nombre">
+          <input type="text" class="form-control" id="nombreInput" placeholder="Nombre" 
+          name="nombre" [(ngModel)]="persona.nombre" required>
         </div>
         <div class="form-group">
           <label for="apellidosInput">Apellidos</label>
-          <input type="text" class="form-control" id="apellidosInput" placeholder="Apellidos">
+          <input type="text" class="form-control" id="apellidosInput" placeholder="Apellidos"
+          [(ngModel)]="persona.apellidos" name="apellidos" required>
         </div>
         <div class="form-group">
           <label for="nifInput">NIF</label>
-          <input type="text" class="form-control" id="nifInput" placeholder="NIF">
+            <input type="number" class="form-control" id="nifInput" placeholder="NIF"
+          [(ngModel)]="persona.nif" name="nif" (change) = "checkDni()" required>
+          <p class="">Letra del DNI : {{letraDni}}</p>
         </div>
         <div class="form-group">
           <label for="emailInput">Email</label>
-          <input type="email" class="form-control" id="emailInput" placeholder="Email">
+          <input type="email" class="form-control" id="emailInput" placeholder="Email"
+          [(ngModel)]="persona.email" name="email" required>
         </div>
         <div class="form-group">
           <label for="telefonoInput">Teléfono</label>
-          <input type="tel" class="form-control" id="telefonoInput" placeholder="Teléfono">
+          <input type="tel" class="form-control" id="telefonoInput" placeholder="Teléfono"
+          [(ngModel)]="persona.telefono" name="telefono" required>
         </div>
         <div class="form-group">
           <label for="sexoInput">Sexo</label>
-          <select class="form-control" id="sexoInput">
-            <option>Masculino</option>
-            <option>Femenino</option>
-            <option>Otro</option>
+          <select class="form-control" id="sexoInput" name="sexo"
+          [(ngModel)]="persona.sexo" required>
+
+            @for(sexo of sexoList ; track sexo){
+
+              <option [value]="sexo">{{sexo}}</option>
+
+            }
+
           </select>
         </div>
         <div class="form-group">
           <label for="formaConocerPagInput">¿Cómo conociste la página?</label>
-          <select class="form-control" id="formaConocerPagInput">
+          <select class="form-control" id="formaConocerPagInput"
+          [(ngModel)]="persona.formaConocerPag" name="formaConocer" required>
             @for(forma of formaConocerPag ; track forma){
 
                 <option [value]="forma">{{forma}}</option>
@@ -44,17 +57,28 @@
             <div class="col-5">
                 <div class="form-group">
                   <label for="contrasenaInput">Contraseña</label>
-                  <input type="password" class="form-control" id="contrasenaInput" placeholder="Contraseña">
+                  <input type="password" class="form-control" id="contrasenaInput" placeholder="Contraseña"
+                  required>
                 </div>
             </div>
             <div class="col-5">
                 <div class="form-group">
                     <label for="contrasenaRepInput">Repetir contraseña</label>
-                    <input type="password" class="form-control" id="contrasenaRepInput" placeholder="Contraseña">
+                    <input type="password" class="form-control" id="contrasenaRepInput" placeholder="Contraseña"
+                    required>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flexCheck" name="checkTerm"
+          [(ngModel)]="checked" required>
+          <label class="form-check-label" for="flexCheck">
+            Aceptar términos y condiciones
+          </label>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
       </form>
 
 </div>
