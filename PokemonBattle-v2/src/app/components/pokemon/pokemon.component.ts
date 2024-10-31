@@ -18,6 +18,7 @@ export class PokemonComponent implements OnInit , OnChanges{
   @Output() attack = new EventEmitter<number>();
   pokemon: PokemonResponse | undefined;
   urlImg: string | undefined;
+  showAnimation: boolean = false;
 
   options: AnimationOptions = {
     path: 'assets/exploding-animation.json',
@@ -42,8 +43,10 @@ export class PokemonComponent implements OnInit , OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['health'] && changes['health'].currentValue != 100){
-      
-
+      this.showAnimation = true;
+      setTimeout(() => {
+        this.showAnimation = false;
+      }, 400);
     }
   }
 

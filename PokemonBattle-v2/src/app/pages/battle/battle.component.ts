@@ -16,11 +16,31 @@ export class BattleComponent {
   attackPokemon(damage: number) {
     
     if (this.turn === 1) {
+
       this.health2 -= damage;
+
+      if(this.health2 <= 0){
+
+        alert('Player 1 wins!');
+        return this.restartBattle();
+        
+      }
+      
       this.turn = 2;
+
     } else {
+
       this.health1 -= damage;
+      
+      if(this.health1 <= 0){
+
+        alert('Player 2 wins!');
+        return this.restartBattle();
+        
+      }
+      
       this.turn = 1;
+
     }
   
   }

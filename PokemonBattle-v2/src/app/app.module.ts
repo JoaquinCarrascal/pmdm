@@ -9,7 +9,7 @@ import { PokemonComponent } from './components/pokemon/pokemon.component';
 import { ImgUrlGeneratorPipe } from './pipes/img-url-generator.pipe';
 import { BattleComponent } from './pages/battle/battle.component';
 import { PokemonRandomizerPipe } from './pipes/pokemon-randomizer.pipe';
-import { provideLottieOptions } from 'ngx-lottie';
+import { LottieComponent, provideLottieOptions } from 'ngx-lottie';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { provideLottieOptions } from 'ngx-lottie';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    LottieComponent
   ],
   providers: [provideHttpClient(), 
             ImgUrlGeneratorPipe, 
