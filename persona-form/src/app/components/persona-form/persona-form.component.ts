@@ -1,5 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { PersonaDTO } from '../../models/Persona.dto';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-persona-form',
@@ -14,6 +15,8 @@ export class PersonaFormComponent{
 
   persona = new PersonaDTO('', '', 0, '', '', '', '', '');
 
+  contrasenaRep = '';
+
   enviado = false;
 
   checked = false;
@@ -25,13 +28,18 @@ export class PersonaFormComponent{
 
   onSubmit() {
     
-    this.enviado = true;
-    console.log(this.persona);
+    if(this.checkForm()){
+
+      this.enviado = true;
+      console.log(this.persona);
+      
+    }
+
   }
+  
+  checkForm(): boolean {
 
-  checkForm() {
-
-
+    return this.persona.contrasena === this.contrasenaRep ? true : false;
 
   }
 
