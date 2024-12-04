@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   var rating = 0.0;
-  Color _selectedColor = Colors.red;
+  Color _selectedColor = Colors.white;
   var textoBoton = 'Botón pulsado';
   int counterBtn = 0;
 
@@ -82,6 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   DropdownMenuEntry(
                     value: Colors.blue,
                     label: 'Blue',
+                  ),
+                  DropdownMenuEntry(
+                    value: Colors.white,
+                    label: 'White',
                   ),
                 ],
                 onSelected: (Color? newColor) {
