@@ -22,20 +22,25 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('People'),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: Center(
+            child: Image.asset('images/sw_logo.png', width: 100, height: 100)),
       ),
-      body: FutureBuilder<PeopleResponse>(
-        future: peopleResponse,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _buildPeopleList(snapshot.data!);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
+      body: Container(
+        color: const Color.fromARGB(255, 0, 0, 0),
+        child: FutureBuilder<PeopleResponse>(
+          future: peopleResponse,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return _buildPeopleList(snapshot.data!);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
 
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
+            // By default, show a loading spinner.
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }
@@ -54,7 +59,46 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
     return ListView.builder(
         itemCount: peopleResponse.results!.length,
         itemBuilder: (context, index) {
-          return Text(peopleResponse.results![index].name!);
+          return Card.filled(
+              child: _SampleCard(
+                  peopleName: peopleResponse.results![index].name!,
+                  peopleImgUrl:
+                      'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg'));
         });
+  }
+}
+// Text(peopleResponse.results![index].name!)
+
+class _SampleCard extends StatelessWidget {
+  const _SampleCard({required this.peopleName, required this.peopleImgUrl});
+  final String peopleName;
+  final String peopleImgUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 300,
+      height: 100,
+      child: Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 26, 26, 26),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 255, 253, 123),
+                blurRadius: 4,
+              )
+            ],
+          ),
+          child: Center(
+              child: Row(
+            children: [
+              Image.network(peopleImgUrl, width: 130, height: 95),
+              Text(peopleName,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 218, 218, 218), fontSize: 20)),
+            ],
+          ))),
+    );
   }
 }
