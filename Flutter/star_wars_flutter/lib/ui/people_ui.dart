@@ -46,7 +46,8 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
   }
 
   Future<PeopleResponse> getPeople() async {
-    final response = await http.get(Uri.parse('https://swapi.dev/api/people/'));
+    final response =
+        await http.get(Uri.parse('https://swapi.dev/api/people/?page=1'));
 
     if (response.statusCode == 200) {
       return PeopleResponse.fromJson(response.body);
@@ -56,49 +57,62 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
   }
 
   Widget _buildPeopleList(PeopleResponse peopleResponse) {
-    return ListView.builder(
-        itemCount: peopleResponse.results!.length,
-        itemBuilder: (context, index) {
-          return Card.filled(
-              child: _SampleCard(
-                  peopleName: peopleResponse.results![index].name!,
-                  peopleImgUrl:
-                      'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg'));
-        });
-  }
-}
-// Text(peopleResponse.results![index].name!)
-
-class _SampleCard extends StatelessWidget {
-  const _SampleCard({required this.peopleName, required this.peopleImgUrl});
-  final String peopleName;
-  final String peopleImgUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 100,
-      child: Container(
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 26, 26, 26),
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromARGB(255, 255, 253, 123),
-                blurRadius: 4,
-              )
-            ],
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 3 / 5,
+      ),
+      itemCount: peopleResponse.results!.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Card(
+            color: const Color.fromARGB(255, 0, 0, 0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  width: 2.0,
+                ),
+                borderRadius: BorderRadius.circular(15.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 255, 212, 69),
+                    blurRadius: 5.0,
+                    spreadRadius: 2.0,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(13.0)),
+                      child: Image.network(
+                        'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      peopleResponse.results![index].name!,
+                      style:
+                          const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          child: Center(
-              child: Row(
-            children: [
-              Image.network(peopleImgUrl, width: 130, height: 95),
-              Text(peopleName,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 218, 218, 218), fontSize: 20)),
-            ],
-          ))),
+        );
+      },
     );
   }
 }
+// 'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg'
+// peopleResponse.results![index].name!
