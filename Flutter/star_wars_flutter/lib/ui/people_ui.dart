@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:star_wars_flutter/people_response/people_response.dart';
+import 'package:star_wars_flutter/people_response/people.dart';
+import 'package:star_wars_flutter/ui/people_detail_screen.dart';
 
 class PeopleUIWidget extends StatefulWidget {
   const PeopleUIWidget({super.key});
@@ -32,7 +34,7 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
           future: peopleResponse,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return _buildPeopleList(snapshot.data!);
+              return _buildPeopleList(context, snapshot.data!);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -56,20 +58,19 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
     }
   }
 
-  Widget _buildPeopleList(PeopleResponse peopleResponse) {
+  Widget _buildPeopleList(BuildContext context, PeopleResponse peopleResponse) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 3 / 5,
-      ),
+          crossAxisCount: 2, childAspectRatio: (200 / 300)),
       itemCount: peopleResponse.results!.length,
       itemBuilder: (context, index) {
-        return _buildPeopleCard(peopleResponse, index);
+        return _buildPeopleCard(peopleResponse.results![index], context);
       },
     );
   }
 
-  Widget _buildPeopleCard(PeopleResponse peopleResponse, int index) {
+  Widget _buildPeopleCard(People people, BuildContext context) {
+    final peopleId = people.url!.split('/')[5];
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Card(
@@ -90,40 +91,46 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
             ],
           ),
           child: Column(
-            children: <Widget>[
-              Expanded(
-                child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(13.0)),
+            children: [
+              ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(13.0)),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PeopleDetailScreen(peopleItem: people),
+                      ),
+                    );
+                  },
                   child: Image.network(
-                    'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg',
+                    'https://starwars-visualguide.com/assets/img/characters/$peopleId.jpg',
                     width: double.infinity,
+                    height: 230,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: SizedBox(
-                  height: 30,
-                  width: 300,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(13.0),
-                        bottomRight: Radius.circular(13.0),
-                      ),
+                child: Container(
+                  height: 38,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(13.0),
+                      bottomRight: Radius.circular(13.0),
                     ),
-                    child: Center(
-                      child: Text(
-                        peopleResponse.results![index].name!,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      people.name!,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),

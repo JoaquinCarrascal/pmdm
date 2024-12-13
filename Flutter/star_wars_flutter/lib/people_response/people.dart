@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Result {
+class People {
   String? name;
   String? height;
   String? mass;
@@ -18,7 +18,7 @@ class Result {
   DateTime? edited;
   String? url;
 
-  Result({
+  People({
     this.name,
     this.height,
     this.mass,
@@ -37,7 +37,7 @@ class Result {
     this.url,
   });
 
-  factory Result.fromMap(Map<String, dynamic> data) => Result(
+  factory People.fromMap(Map<String, dynamic> data) => People(
         name: data['name'] as String?,
         height: data['height'] as String?,
         mass: data['mass'] as String?,
@@ -89,13 +89,13 @@ class Result {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Result].
-  factory Result.fromJson(String data) {
-    return Result.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [People].
+  factory People.fromJson(String data) {
+    return People.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [Result] to a JSON string.
+  /// Converts [People] to a JSON string.
   String toJson() => json.encode(toMap());
 }
