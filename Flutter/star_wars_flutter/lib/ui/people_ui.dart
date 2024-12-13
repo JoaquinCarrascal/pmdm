@@ -64,53 +64,74 @@ class _PeopleUIWidgetState extends State<PeopleUIWidget> {
       ),
       itemCount: peopleResponse.results!.length,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Card(
-            color: const Color.fromARGB(255, 0, 0, 0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(15.0),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 255, 212, 69),
-                    blurRadius: 5.0,
-                    spreadRadius: 2.0,
-                  ),
-                ],
+        return _buildPeopleCard(peopleResponse, index);
+      },
+    );
+  }
+
+  Widget _buildPeopleCard(PeopleResponse peopleResponse, int index) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Card(
+        color: const Color.fromARGB(255, 0, 0, 0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 255, 212, 69),
+                spreadRadius: 3.0,
+                blurRadius: 3.0,
               ),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(13.0)),
-                      child: Image.network(
-                        'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+            ],
+          ),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(13.0)),
+                  child: Image.network(
+                    'https://starwars-visualguide.com/assets/img/characters/${peopleResponse.results![index].url!.split('/')[5]}.jpg',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: SizedBox(
+                  height: 30,
+                  width: 300,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(13.0),
+                        bottomRight: Radius.circular(13.0),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        peopleResponse.results![index].name!,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      peopleResponse.results![index].name!,
-                      style:
-                          const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
